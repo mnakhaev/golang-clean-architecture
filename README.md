@@ -7,3 +7,6 @@
 - Часть 2 - https://youtu.be/s_Bou_mChKs
 - Часть 1 - https://youtu.be/eVhIlhLl4e4
 
+`internal/adapters` - external layer, has no relation to business logic.
+`internal/domain/book/service.go` - contains `Service` interface which represents use-cases (business logic)
+
