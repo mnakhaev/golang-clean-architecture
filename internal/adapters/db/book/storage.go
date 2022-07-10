@@ -2,12 +2,15 @@ package book
 
 import (
 	"ca-library-app/internal/domain/book"
-	"ca-library-app/pkg/client/mongodb"
 )
 
 // bookStorage can contain DB client, wrappers and many other things.
 type bookStorage struct {
-	client mongodb.Client
+	//client mongodb.Client
+}
+
+func NewBookStorage() book.Storage {
+	return &bookStorage{}
 }
 
 func (b *bookStorage) GetOne(uuid string) *book.Book {

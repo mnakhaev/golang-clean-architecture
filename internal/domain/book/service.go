@@ -1,31 +1,32 @@
 package book
 
-import "context"
+import (
+	"context"
 
-// Service interface is a `use case` in terms of clean architecture
-type Service interface {
-	GetBookByUUID(ctx context.Context, uuid string) *Book
-	GetAllBooks(ctx context.Context, limit, offset int) []*Book
-	CreateBook(ctx context.Context, dto *CreateBookDTO) *Book
-}
+	"ca-library-app/internal/adapters/api/author"
+	"ca-library-app/internal/adapters/api/book"
+)
 
 // service struct should contain the main - it is storage (gateway).
 type service struct {
-	storage Storage
+	storage       Storage
+	authorService author.Service // connecting between book service and author service
 }
 
-func NewService(storage Storage) Service {
+func NewService(storage Storage) book.Service {
 	return &service{storage: storage}
 }
 
-func (s *service) GetBookByUUID(ctx context.Context, uuid string) *Book {
+func (s *service) GetByUUID(ctx context.Context, uuid string) *Book {
 	return s.storage.GetOne(uuid)
 }
 
-func (s *service) GetAllBooks(ctx context.Context, limit, offset int) []*Book {
+func (s *service) GetBooks(ctx context.Context, limit, offset int) []*Book {
 	return s.storage.GetAll(limit, offset)
 }
 
-func (s *service) CreateBook(ctx context.Context, dto *CreateBookDTO) *Book {
+func (s *service) Create(ctx context.Context, dto *CreateBookDTO) *Book {
+	//author, err := s.authorService.GetByUUID(ctx, dto.AuthorUUID)
+	// TODO return err if author doesn't exist
 	return nil
 }
