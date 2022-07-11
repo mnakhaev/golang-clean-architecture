@@ -2,13 +2,15 @@ package author
 
 import (
 	"ca-library-app/internal/domain/author"
+	"ca-library-app/pkg/client/mongodb"
 )
 
 type authorStorage struct {
+	db mongodb.Client
 }
 
-func NewAuthorStorage() author.Storage {
-	return &authorStorage{}
+func NewAuthorStorage(db *mongodb.Client) author.Storage {
+	return &authorStorage{db: *db}
 }
 
 func (a *authorStorage) GetOne(uuid string) *author.Author {

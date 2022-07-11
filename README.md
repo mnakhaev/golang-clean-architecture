@@ -10,6 +10,7 @@
 `internal/adapters/` - external layer, has no relation to business logic.
     - `api/` - contains API handlers and interfaces for books, users and other entities.
     - `db/` - contains DB methods for books, users and other entities.
+`internal/composites` - move creation of adapters, external/internal layers into separate entity
 `internal/domain` - business logic for the application.
     - `book/service.go` - contains implementation of use-cases (business logic), like books get/create/... Realization is in place of use (`adapters/api/books/handlers/interface.go`) 
     - `book/dto.go` - represents structures to create/update books. It is needed for `Service` interface and is linking chain between business logic and controller layers.
